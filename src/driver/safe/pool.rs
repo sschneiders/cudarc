@@ -97,10 +97,10 @@ impl CudaPool {
             len * std::mem::size_of::<T>(),
             stream.cu_stream,
         )?;
-        let (read, write) = if stream.ctx().is_managing_stream_synchronization() {
+        let (read, write) = if stream.ctx.is_managing_stream_synchronization() {
             (
-                Some(stream.ctx().new_event(None)?),
-                Some(stream.ctx().new_event(None)?),
+                Some(stream.ctx.new_event(None)?),
+                Some(stream.ctx.new_event(None)?),
             )
         } else {
             (None, None)
